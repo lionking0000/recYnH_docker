@@ -24,3 +24,40 @@ We assumed that the sequencing format is the same as we described in Nature Comm
 
 [Output Files]
 
+
+# How to use Docker
+
+[Build image]
+
+docker build -t recynh .
+
+
+[Run image]
+
+docker run -d -v ~/myshared:/share --name myynh recynh tail -f /dev/null
+
+~/myshared is a shared volume used for convenience for placing input and output files
+
+The command above keeps container running under the name myynh
+
+
+# running interactive mode
+docker run -v /Users/jyang/Dropbox/Code/recYnH:/share -ti recynh /bin/bash
+
+
+
+#Mounting with volume
+#docker run -v /home/toniher/tmp/ELMSeq/data:/input -ti elmseq /bin/bash
+#Supposing a config file:
+#docker run -v /home/toniher/tmp/ELMSeq/data:/input -v /home/toniher/myconfig.json:/etc/myconfig.json -ti elmseq /bin/bash
+
+
+[Excute command]
+
+docker exec myynh rec-Ynh.py -i /share/reads/SRR493366.fastq -o /share/out/test
+
+
+# References & Related information
+
+https://github.com/toniher/ELMSeq/blob/master/Dockerfile
+

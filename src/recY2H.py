@@ -8,14 +8,14 @@
  *   
 '''
 
-from jslib.util import fasta
+import fasta
 #import sys
 #import time
 #from jslib import object
-from jslib import util
+#from jslib import util
 #from exp import Experiment
 import command_center
-from jslib import fileutil
+#from jslib import fileutil
 
 #======================================================================================
 # This program calculate DAMRatio from the ELMSeq data
@@ -30,19 +30,6 @@ OUTPUT_FOLDER = "./output"
 # For EXPERIMENT_TYPE = "promoter"  
 NO_SELECT_FASTQ_PATH = "./data/dam_screen_lib_2_12466_CGTGAT.fastq.gz"
 SELECT_FASTQ_PATH = "./data/dam_screen_lib_2_12466_ACATCG.fastq.gz"
-#MBOI_FASTQ_PATH = "./data/dam_screen_lib_2_12466_GCCTAA.fastq.gz"
-
-# Example sequencing data for translation study (with strong promoter)
-# For EXPERIMENT_TYPE = "utr_with_strong_promoter"  
-#UNCUT_FASTQ_PATH = "./data/dam_screen_lib_2_12466_TGGTCA.fastq.gz"
-#DPNI_FASTQ_PATH = "./data/dam_screen_lib_2_12466_CACTGT.fastq.gz"
-#MBOI_FASTQ_PATH = "./data/dam_screen_lib_2_12466_ATTGGC.fastq.gz"
-
-# Example sequencing data for translation study (with weak promoter)
-# For EXPERIMENT_TYPE = "utr_with_weak_promoter"  
-#UNCUT_FASTQ_PATH = "./data/dam_screen_lib_2_12466_GATCTG.fastq.gz"
-#DPNI_FASTQ_PATH = "./data/dam_screen_lib_2_12466_TCAAGT.fastq.gz"
-#MBOI_FASTQ_PATH = "./data/dam_screen_lib_2_12466_CTGATC.fastq.gz"
 
 # User needs to specify which experiment it is among followings: ( promoter / utr_with_strong_promoter / utr_with_weak_promoter )
 EXPERIMENT_TYPE = "promoter" # "promoter", "utr_with_strong_promoter", "utr_with_weak_promoter" 
@@ -63,7 +50,7 @@ WRITE_ALL_DAMRATIOS = False  # True or False
 #======================================================================================
 
 import os
-import sh
+#import sh
 import subprocess
 import time
 import re
@@ -257,7 +244,7 @@ def CalculateDAMRatio( experiment_type, output_folder, uncut_fastq_path, dpnI_fa
     print "[ Finishing ELMSeq Analysis ]"
 
 def GenerateLastNts( blast_db_path, filepath, length = 30 ):
-    fa = util.read_fasta( filepath )
+    fa = fasta.read_fasta( filepath )
 
     lastXnt_dic = {}
 
@@ -271,7 +258,7 @@ def GenerateLastNts( blast_db_path, filepath, length = 30 ):
     return lastXnt_dic
 
 def ReadLastNts( blast_db_path, length = 30 ):
-    fa = util.read_fasta( blast_db_path )
+    fa = fasta.read_fasta( blast_db_path )
 
     lastXnt_dic = {}
 
@@ -316,7 +303,7 @@ def BLASTN( input_fasta, noselect_blastn_read1_name, noselect_blastn_read2_name,
     #    print "python SAM.py ../data/roth2016_control_set_plus_control.fa output/2016-12-22_MiSeq/Friedrich/17543_S1.sam"
     #    sys.exit(0)
     total_cnt = 0
-    fa = fileutil.read_fasta_file( input_fasta )
+    fa = fasta.read_fasta( input_fasta )
     filepath1 = noselect_blastn_read1_name
     filepath2 = noselect_blastn_read2_name
 
