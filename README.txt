@@ -40,20 +40,21 @@ sh docker_build.sh
 
 docker run -d -v ~/myshared:/share --name myynh recynh tail -f /dev/null
 
-~/myshared is a shared volume used for convenience for placing input and output files
+docker run -d -v /Users/jyang/Dropbox/Code/recYnH/share:/share  --name myynh2 lionking0000/recynh:0.1  tail -f /dev/null
+
+docker exec myynh2 Y2H_Blastn.sh 2017-11-17_MiSeq S1_WD_R1.10000 S1_WD_R2.10000 ./db/A463-MGj69.RBP-MAP.-150 S1_W
+
+
+/Users/jyang/Dropbox/Code/recYnH/share is a shared volume used for convenience for placing input and output files
 
 The command above keeps container running under the name myynh
 
 
 # running interactive mode
-docker run -v /Users/jyang/Dropbox/Code/recYnH/share:/share -ti recynh /bin/bash
+docker run -v /Users/jyang/Dropbox/Code/recYnH/share:/share -ti lionking0000/recynh:0.1 /bin/bash
 
-
-
-#Mounting with volume
-#docker run -v /home/toniher/tmp/ELMSeq/data:/input -ti elmseq /bin/bash
-#Supposing a config file:
-#docker run -v /home/toniher/tmp/ELMSeq/data:/input -v /home/toniher/myconfig.json:/etc/myconfig.json -ti elmseq /bin/bash
+* example
+Y2H_Blastn.sh 2017-11-17_MiSeq S1_WD_R1.10000 S1_WD_R2.10000 ./db/A463-MGj69.RBP-MAP.-150 S1_W
 
 
 [Excute command]

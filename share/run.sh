@@ -228,7 +228,7 @@ fi
 #	prey      GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT
 #	             ***  ** **** ****************************************
 #
-echo "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ./fastq/$2.fastq.gz ./fastq/$3.fastq.gz"
+echo "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ../fastq/$2.fastq.gz ../fastq/$3.fastq.gz"
 cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ./fastq/$2.fastq.gz ./fastq/$3.fastq.gz
 #cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/Blastn/$2.fastq -p output/$1/Blastn/$3.fastq -m 15 --discard-untrimmed ../$1/$2.fastq.gz ../$1/$3.fastq.gz
 
@@ -264,6 +264,7 @@ main.py BLASTN $4.fa output/$1/$6/$2.blastn output/$1/$6/$3.blastn > output/$1/$
 
 
 # echo "python main.py BLASTN_BARCODE $4.fa output/$1/$6/$2.blastn output/$1/$6/$3.blastn > output/$1/$6/$5.ppi.txt" # 2018/03/28 
+
 
 
 
