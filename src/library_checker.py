@@ -8,8 +8,7 @@ import command_center
 import math
 #import rimage
 import sys
-from jslib import util
-from jslib import fileutil
+import fasta
 
 def BLASTN_NEW( argv ):
     '''
@@ -29,7 +28,7 @@ def BLASTN_NEW( argv ):
     #    print "python SAM.py ../data/roth2016_control_set_plus_control.fa output/2016-12-22_MiSeq/Friedrich/17543_S1.sam"
     #    sys.exit(0)
     total_cnt = 0
-    fa = fileutil.read_fasta_file( sys.argv[2] )
+    fa = fasta.read_fasta_file( sys.argv[2] )
     filepath1 = sys.argv[3]
     filepath2 = sys.argv[4]
 
@@ -123,7 +122,7 @@ def BLASTN( argv ):
     #    print "python SAM.py ../data/roth2016_control_set_plus_control.fa output/2016-12-22_MiSeq/Friedrich/17543_S1.sam"
     #    sys.exit(0)
     total_cnt = 0
-    fa = fileutil.read_fasta_file( sys.argv[2] )
+    fa = fasta.read_fasta_file( sys.argv[2] )
     filepath1 = sys.argv[3]
     filepath2 = sys.argv[4]
 
@@ -220,7 +219,7 @@ def BLASTN_BARCODE( argv ):
     #    print "python SAM.py ../data/roth2016_control_set_plus_control.fa output/2016-12-22_MiSeq/Friedrich/17543_S1.sam"
     #    sys.exit(0)
     total_cnt = 0
-    fa = fileutil.read_fasta_file( sys.argv[2] )
+    fa = fasta.read_fasta_file( sys.argv[2] )
     filepath1 = sys.argv[3]
     filepath2 = sys.argv[4]
 
@@ -335,7 +334,7 @@ def BLASTN_22( argv ):
     #    print "python SAM.py ../data/roth2016_control_set_plus_control.fa output/2016-12-22_MiSeq/Friedrich/17543_S1.sam"
     #    sys.exit(0)
     total_cnt = 0
-    fa = fileutil.read_fasta_file( sys.argv[2] )
+    fa = fasta.read_fasta_file( sys.argv[2] )
     filepath1 = sys.argv[3]
     filepath2 = sys.argv[4]
 
@@ -477,7 +476,7 @@ def BLASTN_22( argv ):
         total_cnt += 1
     f.close()
 
-    fa = fileutil.read_fasta_file( sys.argv[2] )
+    fa = fasta.read_fasta_file( sys.argv[2] )
     id_list = fa.keys()
     id_list.sort()
 
@@ -559,7 +558,7 @@ def SamToMatrix( argv ):
     #@M03766:70:000000000-BH6F4:1:1101:12554:1950	113	REEP2	2	41	97M	SARNP	40	0	AAACCCATCAAAAAAGCGCCCAAAGCTGAGCCACTGGCTGCCAAGACGCTGAAGACCCGGCCCAAGAAGAAGACCTCTGGCGGGGGCGACTCAGCTT	DEG.C00E@DGFF<CC-C?HF??<?<1HHF@2<@0/?/22DB//BC<3?24FFE?//?EF/GFB444443@?B1?1/////E011A0GFEF3EA1BB	AS:i:184	XN:i:0	XM:i:2	XO:i:0	XG:i:0	NM:i:2	MD:Z:39T7A49	YS:i:93	YT:Z:DP
     #@M03766:70:000000000-BH6F4:1:1101:12554:1950	177	SARNP	40	41	36S59M	REEP2	2	0	CAGTACGGGAAAAGTGACAGACTAGAATAACTGTTCAACCGCAGAGGATACAGAGGCAAAGAAGAGGAAAAAAGCAGAGCGCTTAGAGATTGCCT	>/?///?121B1B1B2?1B1444FB444GFB43BF/>?//?3DHHF444B3HHGB3DDHHFGEFDF3/FB55FHGG?10A35555F5HGFEE0EB	AS:i:93	XN:i:0	XM:i:4	XO:i:0	XG:i:0	NM:i:4	MD:Z:4A30G12T1G8	YS:i:184	YT:Z:DP
 
-    fa = fileutil.read_fasta_file( sys.argv[2] )
+    fa = fasta.read_fasta_file( sys.argv[2] )
     samfile = argv[3]
 
     ppi_cnt_dic = {}
@@ -632,7 +631,7 @@ def GenerateLastNts( argv ):
     else:
         length = 30
 
-    fa = util.read_fasta( filepath )
+    fa = fasta.read_fasta( filepath )
 
     lastXnt_dic = {}
 
@@ -645,7 +644,7 @@ def GenerateLastNts( argv ):
 def CheckLastNts( argv ):
     filepath = argv[2]
 
-    fa = util.read_fasta( filepath )
+    fa = fasta.read_fasta( filepath )
 
     lastXnt_dic = {}
 
@@ -662,8 +661,8 @@ def CompareLastNts( argv ):
     filepath1 = argv[2]
     filepath2 = argv[3]
 
-    fa1 = util.read_fasta( filepath1 )
-    fa2 = util.read_fasta( filepath2 )
+    fa1 = fasta.read_fasta( filepath1 )
+    fa2 = fasta.read_fasta( filepath2 )
 
     lastXnt_dic1 = {}
     lastXnt_dic2 = {}

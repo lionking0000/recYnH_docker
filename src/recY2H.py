@@ -1,3 +1,4 @@
+#!/usr/bin/python
 '''
  *
  *  recY2H CommandLine v1.0
@@ -54,7 +55,7 @@ import os
 import subprocess
 import time
 import re
-import psutil
+#import psutil
 
 
 def read_summary_file( input_filepath="./output/exact_match/summary/Translation_Weak_Promoter_llmp200.result.txt" ):
@@ -85,11 +86,11 @@ def read_summary_file( input_filepath="./output/exact_match/summary/Translation_
     print len( data )
     return title, cnt_infos, data
 
-
+'''
 def MonitorMemory():
     process = psutil.Process(os.getpid())
     print(process.memory_info().rss/1024.0/1024.0)
-
+'''
 
 def getCommandOutput(command, exedir = None):
     if exedir != None:

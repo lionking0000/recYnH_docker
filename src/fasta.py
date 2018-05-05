@@ -15,7 +15,10 @@ def read_fasta( filepath ):
         else:
             sequence_dic[id] += line
     return sequence_dic
-    
+
+def read_fasta_file( filepath ):
+    return read_fasta( filepath )
+
 def RevComplement( seq ):
     complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N':'N'}
     reverse_complement = "".join(complement.get(base, base) for base in reversed(seq))

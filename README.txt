@@ -9,6 +9,7 @@ We assumed that the sequencing format is the same as we described in Nature Comm
 
 # python recYnH.py -i [Input fasta file] -f1 [Input fastq file1] -f2 [Input fastq file2] -o [Output folder]
 
+sh Y2H_Blastn.sh 2017-11-17_MiSeq S1_WD_R1 S1_WD_R2 ../data/A463-MGj69.RBP-MAP.-150 S1_W > qjobs/qjob_Sebastian_2017-11-17_MiSeq_S1_W1.sh
 
 # Typical output
 
@@ -31,6 +32,9 @@ We assumed that the sequencing format is the same as we described in Nature Comm
 
 docker build -t recynh .
 
+or
+
+sh docker_build.sh
 
 [Run image]
 
@@ -42,7 +46,7 @@ The command above keeps container running under the name myynh
 
 
 # running interactive mode
-docker run -v /Users/jyang/Dropbox/Code/recYnH:/share -ti recynh /bin/bash
+docker run -v /Users/jyang/Dropbox/Code/recYnH/share:/share -ti recynh /bin/bash
 
 
 

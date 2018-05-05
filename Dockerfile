@@ -1,12 +1,15 @@
 FROM rocker/r-ver:3.3.1
+#FROM biocorecrg/debian-perlbrew-pyenv
 
 # File Author / Maintainer
 MAINTAINER Jae-Seong Yang <jae-seong.yang@crg.eu>
 
 ARG BOWTIE_VERSION=1.2.1.1
 
+#ARG DEBIAN_FRONTEND=noninteractive
+
 # Install external dependencies 
-RUN apt-get update -qq && apt-get install -y --no-install-recommends python curl libcurl4-openssl-dev libssl-dev libsqlite3-dev libxml2-dev qpdf git
+RUN apt-get update -qq && apt-get install -y --no-install-recommends apt-utils python curl libcurl4-openssl-dev libssl-dev libsqlite3-dev libxml2-dev qpdf git python-pip libpython2.7-dev 
 
 # Install bowtie 
 RUN cd /usr/local; curl --fail --silent --show-error --location --remote-name https://github.com/BenLangmead/bowtie/releases/download/v$BOWTIE_VERSION/bowtie-${BOWTIE_VERSION}-linux-x86_64.zip
@@ -21,6 +24,17 @@ RUN cd /usr/local/bin; ln -s ../bowtie-${BOWTIE_VERSION}/bowtie* .
 COPY deps.R /usr/local
 
 RUN Rscript /usr/local/deps.R
+
+# Install pip and cutadapt required libraries
+#RUN apt-get install --yes \
+#        python-pip \
+#        libpython2.7-dev
+
+
+# Install cutadapt
+RUN pip install 'cutadapt==1.8.3'
+
+
 
 # Install recYnH
 COPY src/* /usr/local/bin/
@@ -37,7 +51,11 @@ COPY src/* /usr/local/bin/
 
 # Clean cache
 RUN apt-get clean
+RUN apt-get remove --yes --purge build-essential
 RUN set -x; rm -rf /var/lib/apt/lists/*
 
 # Shared mounting
 VOLUME /share
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8

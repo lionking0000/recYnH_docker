@@ -1,13 +1,12 @@
-from jslib.util import fasta
+import fasta
 import sys
 import time
-from jslib import object
-from jslib import util
-from exp import Experiment
+import object
 import command_center
 import library_checker
+#from exp import Experiment
 
-
+'''
 def ReadConfig( filepath ):
     aExp = Experiment()
 
@@ -44,7 +43,7 @@ def ReadConfig( filepath ):
     f.close()
 
     return aExp
-
+'''
 def Run( argv ):
     aExp = ReadConfig( sys.argv[2] )
     # test
@@ -111,10 +110,9 @@ def ExtractRealPPI( argv ):
     ExtractMatrix( ".v_v.txt", filepath, "###################### print V_ vs V_ PPI matrix (Real PPI) #############################" ) 
 
 def PKAMotifAnalysis( argv ):
-    from jslib import fileutil
     from jslib import utr_designer
     
-    fa = fileutil.read_fasta_file( "../data/P170_4_library_MGj5615-Jun-2017122014.fa" )
+    fa = fasta.read_fasta( "../data/P170_4_library_MGj5615-Jun-2017122014.fa" )
     codon_dic = utr_designer.GetCodonDic()
     codon_dic[ "TAA" ] = "*"
     codon_dic[ "TGA" ] = "*"
