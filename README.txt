@@ -1,16 +1,16 @@
 [What is recYnH?]
 
-This program is taking recYnH sequencing files and generating recYnH Scores to correponding sequences.
+This program is taking recYnH sequencing files and generating recYnH interaction score matrix to correponding genes.
 
 We assumed that the sequencing format is the same as we described in Nature Communication 2018 Paper.
 
 # After setting proper parameter in recYnH.py file
 # User can run the program as following command
 
-# python recYnH.py
+# python recYnH.py -i [Input fasta file] -f1 [Input fastq file1] -f2 [Input fastq file2] -o [Output folder]
 
 
-# Typical result
+# Typical output
 
 [ Starting recY2H Analysis ]
 [ Read No-selection Sequence File ] ./data/XXXX.fastq.gz
@@ -23,3 +23,4 @@ We assumed that the sequencing format is the same as we described in Nature Comm
 
 
 [Output Files]
+
