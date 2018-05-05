@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #===============================================================================
 # Y2H_Blastn.sh
 # created 2017.07.03
@@ -203,10 +205,20 @@
 
 
 # make output folder
-echo "cd /users/lserrano/jyang/work/Mireia/src"
-#echo "mkdir output/$1/Blastn"
-echo "mkdir output/$1"
-echo "mkdir output/$1/$6"
+echo "cd /share"
+cd /share
+
+if [ ! -f output/$1 ]; then
+   echo "mkdir output/$1"
+   mkdir output/$1
+fi
+
+if [ ! -f output/$1/$6 ]; then
+   echo "mkdir output/$1/$6"
+   mkdir output/$1/$6
+fi
+
+
 
 # remove 5' end adaptor sequences in both fastq file; remove reads if any of read does not have an adaptor sequence ( Temporarily now using fastq files in Friedrich folder which are already trimmed )
 # -m 15 : Discard trimmed reads that are shorter than LENGTH.
@@ -217,28 +229,34 @@ echo "mkdir output/$1/$6"
 #	             ***  ** **** ****************************************
 #
 echo "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ../$1/$2.fastq.gz ../$1/$3.fastq.gz"
+cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ../$1/$2.fastq.gz ../$1/$3.fastq.gz
 #cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/Blastn/$2.fastq -p output/$1/Blastn/$3.fastq -m 15 --discard-untrimmed ../$1/$2.fastq.gz ../$1/$3.fastq.gz
 
 # convert fastq to fasta ( Temporarily now using fastq file generated in Friedrich folder; since it is the same fastq. But We need to change it to Blastn for general cases )
 #echo "python main.py fastq_to_fasta output/$1/Friedrich/$2.fastq > output/$1/Blastn/$2.fa"
 #echo "python main.py fastq_to_fasta output/$1/Friedrich/$3.fastq > output/$1/Blastn/$3.fa"
-echo "python main.py fastq_to_fasta output/$1/$6/$2.fastq > output/$1/$6/$2.fa"
-echo "python main.py fastq_to_fasta output/$1/$6/$3.fastq > output/$1/$6/$3.fa"
+echo "main.py fastq_to_fasta output/$1/$6/$2.fastq > output/$1/$6/$2.fa"
+main.py fastq_to_fasta output/$1/$6/$2.fastq > output/$1/$6/$2.fa
+echo "main.py fastq_to_fasta output/$1/$6/$3.fastq > output/$1/$6/$3.fa"
+main.py fastq_to_fasta output/$1/$6/$3.fastq > output/$1/$6/$3.fa
 #python main.py fastq_to_fasta output/2017-07-03_MiSeq/Friedrich/60_Q_R1.fastq > output/2017-07-03_MiSeq/Blastn/60_Q_R1.fa
 #python main.py fastq_to_fasta output/2017-07-03_MiSeq/Friedrich/60_Q_R2.fastq > output/2017-07-03_MiSeq/Blastn/60_Q_R2.fa
 
 
 # blastn-short search
 echo "blastn -db $4.fa  -query output/$1/$6/$2.fa -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > output/$1/$6/$2.blastn"
+blastn -db $4.fa  -query output/$1/$6/$2.fa -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > output/$1/$6/$2.blastn
 #blastn -db ../data/P170_4_library_MGj5615-Jun-2017122014.-100.fa  -query output/2017-07-03_MiSeq/Blastn/60_Q_R1.fa -task blastn-short -outfmt 6 -max_target_seqs 10 -evalue 1e-8 > output/2017-07-03_MiSeq/Blastn/60_Q_R1.blastn
 #echo "blastn -db ../data/P170_4_library_MGj5615-Jun-2017122014.-100.fa  -query output/2017-07-03_MiSeq/Blastn/60_Q_R2.fa -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > output/2017-07-03_MiSeq/Blastn/60_Q_R2.blastn"
 echo "blastn -db $4.fa  -query output/$1/$6/$3.fa -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > output/$1/$6/$3.blastn"
+blastn -db $4.fa  -query output/$1/$6/$3.fa -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > output/$1/$6/$3.blastn
 #blastn -db ../data/P170_4_library_MGj5615-Jun-2017122014.-100.fa  -query output/2017-07-03_MiSeq/Blastn/60_Q_R2.fa -task blastn-short -outfmt 6 -max_target_seqs 10 -evalue 1e-8 > output/2017-07-03_MiSeq/Blastn/60_Q_R2.blastn
 #echo "blastn -db ../data/P170_4_library_MGj5615-Jun-2017122014.-100.fa  -query output/$1/Friedrich/$2.fastq -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8"
 
 
 # python parse blastn output and make ppi map
-echo "python main.py BLASTN $4.fa output/$1/$6/$2.blastn output/$1/$6/$3.blastn > output/$1/$6/$5.ppi.txt"
+echo "main.py BLASTN $4.fa output/$1/$6/$2.blastn output/$1/$6/$3.blastn > output/$1/$6/$5.ppi.txt"
+main.py BLASTN $4.fa output/$1/$6/$2.blastn output/$1/$6/$3.blastn > output/$1/$6/$5.ppi.txt
 # cat output/2017-07-03_MiSeq/Blastn/60_Q_R1.blastn | awk '{print $1}' | uniq | wc    ## ==> 3209686
 # cat output/2017-07-03_MiSeq/Blastn/60_Q_R2.blastn | awk '{print $1}' | uniq | wc    ## ==> 3029067
 # python main.py BLASTN ../data/P170_4_library_MGj5615-Jun-2017122014.-100.fa output/2017-07-03_MiSeq/Blastn/60_Q_R1.blastn output/2017-07-03_MiSeq/Blastn/60_Q_R2.blastn    ##  ==> 2507307

@@ -1,3 +1,4 @@
+#!/opt/conda/bin/python2.7
 import re
 
 def read_fasta( filepath ):

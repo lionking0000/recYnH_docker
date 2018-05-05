@@ -65,3 +65,20 @@ docker exec myynh rec-Ynh.py -i /share/reads/SRR493366.fastq -o /share/out/test
 
 https://github.com/toniher/ELMSeq/blob/master/Dockerfile
 
+
+
+sh Y2H_Blastn.sh 2017-11-17_MiSeq S1_WD_R1 S1_WD_R2 ../data/A463-MGj69.RBP-MAP.-150 S1_W > qjobs/qjob_Sebastian_2017-11-17_MiSeq_S1_W1.sh
+
+
+## in the docker
+
+cd /share
+mkdir output/2017-11-17_MiSeq/
+cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/2017-11-17_MiSeq//S1_WD_R1.fastq -p output/2017-11-17_MiSeq//S1_WD_R2.fastq -m 15 --discard-untrimmed ./fastq/S1_WD_R1.10000.fastq.gz ./fastq/S1_WD_R2.10000.fastq.gz
+
+main.py fastq_to_fasta output/2017-11-17_MiSeq//S1_WD_R1.fastq > output/2017-11-17_MiSeq//S1_WD_R1.fa
+main.py fastq_to_fasta output/2017-11-17_MiSeq//S1_WD_R2.fastq > output/2017-11-17_MiSeq//S1_WD_R2.fa
+blastn -db ./db/A463-MGj69.RBP-MAP.-150.fa  -query output/2017-11-17_MiSeq//S1_WD_R1.fa -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > output/2017-11-17_MiSeq//S1_WD_R1.blastn
+blastn -db ./db/A463-MGj69.RBP-MAP.-150.fa  -query output/2017-11-17_MiSeq//S1_WD_R2.fa -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > output/2017-11-17_MiSeq//S1_WD_R2.blastn
+main.py BLASTN ./db/A463-MGj69.RBP-MAP.-150.fa output/2017-11-17_MiSeq//S1_WD_R1.blastn output/2017-11-17_MiSeq//S1_WD_R2.blastn > output/2017-11-17_MiSeq//S1_W.ppi.txt
+

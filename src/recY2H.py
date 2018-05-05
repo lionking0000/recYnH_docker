@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/conda/bin/python2.7
 '''
  *
  *  recY2H CommandLine v1.0
