@@ -795,12 +795,12 @@ BasicStats2 <- function(m1, m2, INT_CUTOFF=0){
 }
 
 
-SaveMatrixPlot <- function( m, alpha, filepath ){
+SaveMatrixPlot <- function( m, alpha, filepath, fontsize = 4 ){
 	#png("/Users/jyang/Dropbox (CRG)/Collaboration/Mireia/NGS_Results/R75_MGj48/R71_76.S1.png",width=800,height=750)
 	#simple_plotLog2Matrix(m1_3,1)
 	#dev.off()
 	png(filepath,width=800,height=750)    
-	simple_plotLog2Matrix(m,alpha)
+	simple_plotLog2Matrix(m,alpha,fontsize)
 	dev.off()                                   
 }            
   

@@ -7,16 +7,17 @@
 ######################################################################################################################################
 
 
-source( "./src/init.R" )
+source( "./init.R" )
 
-m1 = drawMatrix("./share/output/test/recYnH.ppi.txt",0.5) 
-m2 = drawMatrix("./share/output/test/recYnH.ppi.txt",0.5) 
+m1 = drawMatrix("../share/output/test/recYnH.ppi.txt",0.5) 
+m2 = drawMatrix("../share/output/test/recYnH.ppi.txt",0.5) 
 is2 = InteractionScores(m1,m2,1.0)  
 nis2 = NewInteractionScores(m1,m2,1.0)  
 CorMatrix(is2,nis2)
-SaveMatrixPlot(is2, 1.0, "./share/output/test/recYnH.ppi.is.png", 4 ) 
-SaveMatrixPlot(nis2, 1.0, "./share/output/test/recYnH.ppi.nis.png", 4 ) 
+SaveMatrixPlot(is2, 1.0, "../share/output/test/recYnH.ppi.is.png", 4 ) 
+SaveMatrixPlot(nis2, 1.0, "../share/output/test/recYnH.ppi.nis.png", 4 ) 
 
+quit()
 ###################################################################################################################################### 
 ## Initilize functions and load data
 source( "/Volumes/users/lserrano/jyang/work/Mireia/src/init.R" )
