@@ -65,9 +65,13 @@ def run( args ):
     run_cmd( cmd )
     
     # python parse blastn output and make ppi map
+    # currently stringent case, no restriction for position cases
+    # maybe ignoring orientation could be added in the future
     if args.relaxed == True:
-        print "relaxed mode"
+        # no restriction for aligned position
+        cmd = "main.py BLASTN_RELAXED %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
+        run_cmd( cmd )  
     else:
-        cmd = "main.py BLASTN %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
+        # very stringent case
+        cmd = "main.py BLASTN_NEW %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
         run_cmd( cmd )
-        print cmd

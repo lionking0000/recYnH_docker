@@ -301,6 +301,7 @@ if __name__ == "__main__":
     aCommand.AddCommand( "BLASTN", library_checker.BLASTN )
     aCommand.AddCommand( "BLASTN_NEW", library_checker.BLASTN_NEW )
     aCommand.AddCommand( "BLASTN_BARCODE", library_checker.BLASTN_BARCODE )
+    aCommand.AddCommand( "BLASTN_RELAXED", library_checker.BLASTN_RELAXED )
     aCommand.Run()
 
 
