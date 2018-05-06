@@ -25,3 +25,4 @@ RUN set -x; rm -rf /var/lib/apt/lists/*
 
 # Shared mounting
 VOLUME /share
+VOLUME /src

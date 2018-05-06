@@ -1,3 +1,4 @@
+#!/opt/conda/bin/python2.7
 import sys
 import argparse
 import align
@@ -16,11 +17,13 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers(dest='cmd', metavar="COMMAND", help='sub-command help')
     align_parser = subparsers.add_parser('align', help='a help for align')
     align_parser.add_argument('-p', '--program', default='Y2H', help="set the experiments type ('Y2H'|'Y3H') (default 'Y2H')" ) # Y2H or Y3H
+    align_parser.add_argument('-r', '--relaxed', action='store_true', help="set relaxed alignment mode" ) # Y2H or Y3H
     align_parser.add_argument('-i1', '--fasta1', required=True, help="set the sequence of baits and preys; if i2 is set then it is for baits" ) # Y2H or Y3H
     align_parser.add_argument('-i2', '--fasta2', required=False, help="set the sequence of baits (OPTIONAL)" ) # Y2H or Y3H
     align_parser.add_argument('-f1', '--fastq1', required=True, help="set the FASTQ file (read 1 = baits)" ) # Y2H or Y3H
     align_parser.add_argument('-f2', '--fastq2', required=True, help="set the FASTQ file (read 2 = preys)" ) # Y2H or Y3H
-    align_parser.add_argument('-o', '--output', required=False, help="set the output folder name (default 'recYnH_output')" ) # Y2H or Y3H
+    align_parser.add_argument('-o', '--output', required=False, help="set the output directory path (default 'recYnH_output')" ) # Y2H or Y3H
+    align_parser.add_argument('-n', '--name', default='recYnH', required=False, help="set the output filename (default 'recYnH')" ) # Y2H or Y3H
     
     merge_parser = subparsers.add_parser('merge', help='a help for merge') #, epilog = "Run 'recYnH.py merge --help' for more information on a command.")
     merge_parser.add_argument('-p', '--program', default='Y2H', help="set the experiments type ('Y2H'|'Y3H') (default 'Y2H')" ) # Y2H or Y3H
@@ -35,13 +38,6 @@ if __name__ == "__main__":
 
     if ( args.cmd == "align" ):
         align.run( args )
-        print args.program
-        print args.fasta1
-        print args.fasta2
-        print args.fastq1
-        print args.fastq2
-        print args.output    
-        pass
     elif ( args.cmd == "merge" ):
         merge.run( args )
         print args.program

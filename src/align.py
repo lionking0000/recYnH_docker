@@ -1,0 +1,73 @@
+
+import os
+VERBOSE = False
+
+def run_cmd( cmd ):
+    if VERBOSE: print cmd
+    os.system( cmd )
+
+def run( args ):
+    #print args.program
+    #print args.fasta1
+    #print args.fasta2
+    #print args.fastq1
+    #print args.fastq2
+    #print args.output   
+
+    if args.fasta2 == None:
+        args.fasta2 = args.fasta1
+
+    [ dirname, fq1 ] = os.path.split( args.fastq1 )
+    [ dirname, fq2 ] = os.path.split( args.fastq2 )
+
+    if fq1[-3:] == ".gz":
+        fq1 = fq1[:-3]
+    if fq2[-3:] == ".gz":
+        fq2 = fq2[:-3]
+    
+    # make output folder
+    if os.path.exists( args.output ) == False:
+        os.makedirs( args.output )
+    
+    temp_dir = os.path.join( args.output, "tmp" )
+    if os.path.exists( temp_dir ) == False:
+        os.makedirs( temp_dir )
+    
+    fq1 = os.path.join( temp_dir, fq1 )
+    fq2 = os.path.join( temp_dir, fq2 )
+    fa1 = fq1 + ".fa"
+    fa2 = fq2 + ".fa"
+
+    # remove 5' end adaptor sequences in both fastq file; remove reads if any of read does not have an adaptor sequence ( Temporarily now using fastq files in Friedrich folder which are already trimmed )
+    # -m 15 : Discard trimmed reads that are shorter than LENGTH.
+    # --discard-untrimmed : Discard reads that do not contain the adapter.
+    #
+    #	bait      --CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT
+    #	prey      GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT
+    #	             ***  ** **** ****************************************
+    #
+    #cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ./fastq/$2.fastq.gz ./fastq/$3.fastq.gz"
+    cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o %s -p %s -m 15 --discard-untrimmed %s %s" % ( fq1, fq2, args.fastq1, args.fastq2 )
+    run_cmd( cmd )
+
+    # convert fastq to fasta ( Temporarily now using fastq file generated in Friedrich folder; since it is the same fastq. But We need to change it to Blastn for general cases )
+    cmd = "main.py fastq_to_fasta %s > %s" % ( fq1, fa1 )
+    run_cmd( cmd )
+    
+    cmd = "main.py fastq_to_fasta %s > %s" % ( fq2, fa2 )
+    run_cmd( cmd )
+    
+    # blastn-short search
+    cmd = "blastn -db %s  -query %s -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > %s.blastn" % ( args.fasta1, fa1, fa1 )
+    run_cmd( cmd )
+
+    cmd = "blastn -db %s  -query %s -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > %s.blastn" % ( args.fasta2, fa2, fa2 )
+    run_cmd( cmd )
+    
+    # python parse blastn output and make ppi map
+    if args.relaxed == True:
+        print "relaxed mode"
+    else:
+        cmd = "main.py BLASTN %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
+        run_cmd( cmd )
+        print cmd
