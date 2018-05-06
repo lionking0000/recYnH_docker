@@ -12,15 +12,15 @@
 library("RColorBrewer")
 require(pheatmap)
 require(gtools)
-require(gplots)
+#require(gplots)
 require(reshape2)
-library(psych)
+#library(psych)
 library(clipr)
-library(swfscMisc)               # for uniform.test    
+#library(swfscMisc)               # for uniform.test    
 library(PerformanceAnalytics)
 library(mixtools)
 library(pROC)    
-library(d3heatmap)
+#library(d3heatmap)
 library(outliers)
 library(readxl)  
 library(mixtools) 
@@ -3453,7 +3453,7 @@ TestGammaMixture2 <- function(){
 }                                              
                                                    
 
-
+if (FALSE){
 	# 2016-12-22_MiSeq; Roth75-exp1; MGj46 ( - R75_41,WDR7 / - R75_72,PLEKHG7 )     
 	bm1_W = drawMatrix("/Volumes/users/lserrano/jyang/work/Mireia/src/output/2016-12-22_MiSeq/Blastn/17543_S1.ppi.txt.new",0.5) # no selection ; 		46_WC_R12D12    "sum = 1968532"
 	bm1_A = drawMatrix("/Volumes/users/lserrano/jyang/work/Mireia/src/output/2016-12-22_MiSeq/Blastn/17544_S2.ppi.txt.new",0.5) # selection    ;    	46_AC_R12D12    "sum = 1541502" 
@@ -3485,7 +3485,7 @@ TestGammaMixture2 <- function(){
 	bm6_SQ = drawMatrix("/Volumes/users/lserrano/jyang/work/Mireia/src/output/2017-11-03_MiSeq/Blastn/S2_Q.ppi.txt.new",0.5)
 	bm7_SW = drawMatrix("/Volumes/users/lserrano/jyang/work/Mireia/src/output/2017-11-03_MiSeq/Blastn/S3_W.ppi.txt.new",0.5)
 	bm7_SQ = drawMatrix("/Volumes/users/lserrano/jyang/work/Mireia/src/output/2017-11-03_MiSeq/Blastn/S4_Q.ppi.txt.new",0.5)
-	
+}
 	
 	
 

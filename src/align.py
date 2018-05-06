@@ -51,10 +51,10 @@ def run( args ):
     run_cmd( cmd )
 
     # convert fastq to fasta ( Temporarily now using fastq file generated in Friedrich folder; since it is the same fastq. But We need to change it to Blastn for general cases )
-    cmd = "main.py fastq_to_fasta %s > %s" % ( fq1, fa1 )
+    cmd = "python main.py fastq_to_fasta %s > %s" % ( fq1, fa1 )
     run_cmd( cmd )
     
-    cmd = "main.py fastq_to_fasta %s > %s" % ( fq2, fa2 )
+    cmd = "python main.py fastq_to_fasta %s > %s" % ( fq2, fa2 )
     run_cmd( cmd )
     
     # blastn-short search
@@ -69,9 +69,9 @@ def run( args ):
     # maybe ignoring orientation could be added in the future
     if args.relaxed == True:
         # no restriction for aligned position
-        cmd = "main.py BLASTN_RELAXED %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
+        cmd = "python main.py BLASTN_RELAXED %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
         run_cmd( cmd )  
     else:
         # very stringent case
-        cmd = "main.py BLASTN_NEW %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
+        cmd = "python main.py BLASTN_NEW %s %s.blastn %s.blastn > %s/%s.ppi.txt" % ( args.fasta1, fa1, fa2, args.output, args.name )
         run_cmd( cmd )
