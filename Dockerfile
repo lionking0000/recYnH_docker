@@ -34,6 +34,7 @@ RUN apt-get clean ; apt-get remove --yes --purge build-essential
 
 # Shared mounting
 VOLUME /share
+VOLUME /fastq
 VOLUME /src
 
 
