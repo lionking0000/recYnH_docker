@@ -19,13 +19,25 @@ RUN Rscript -e "install.packages(c('d3heatmap','matrixStats'))"
 
 # Install external dependencies 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends python python-numpy python-scipy python-pip libpython2.7-dev bowtie
-RUN apt-get install -y --no-install-recommends ncbi-blast+
+#RUN apt-get install -y --no-install-recommends ncbi-blast+
+
+#RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-x64-linux.tar.gz && \
+#    tar xzf ncbi-blast-2.6.0+-x64-linux.tar.gz
+#
+#ENV PATH=".:/ncbi-blast-2.6.0+/bin:${PATH}"
+
+# Install blastn
+# wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-x64-linux.tar.gz
+# wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.8.0alpha/ncbi-blast-2.8.0-alpha+-x64-linux.tar.gz
+COPY 3rd_party/* /usr/local/bin/
 
 # Install cutadapt
 RUN pip install 'cutadapt==1.8.3'
 
 # Install recYnH
 COPY src/* /usr/local/bin/
+
+
 
 # Clean cache
 RUN apt-get clean

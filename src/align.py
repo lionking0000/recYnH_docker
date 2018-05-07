@@ -3,6 +3,8 @@ import threading
 
 VERBOSE = True # False
 
+NUM_THREADS = 1 #
+
 def run_cmd( cmd ):
     if VERBOSE: print cmd
     os.system( cmd )
@@ -10,10 +12,10 @@ def run_cmd( cmd ):
 def align_subprocess( original_fasta, fasta, fastq  ):
     # convert fastq to fasta ( Temporarily now using fastq file generated in Friedrich folder; since it is the same fastq. But We need to change it to Blastn for general cases )
     cmd = "python main.py fastq_to_fasta %s > %s" % ( fastq, fasta )
-    run_cmd( cmd )
+    #run_cmd( cmd )
     
-    # blastn-short search
-    cmd = "blastn -db %s  -query %s -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > %s.blastn" % ( original_fasta, fasta, fasta )
+    # blastn-short search                                                                         (20) 
+    cmd = "blastn -num_threads %d -db %s  -query %s -task blastn-short -outfmt 6 -max_target_seqs 5 -evalue 1e-8 > %s.blastn" % ( NUM_THREADS, original_fasta, fasta, fasta )
     run_cmd( cmd )
    
 
