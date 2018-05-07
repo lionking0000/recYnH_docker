@@ -1,10 +1,21 @@
-
 import os
+import threading
+
 VERBOSE = True # False
 
 def run_cmd( cmd ):
     if VERBOSE: print cmd
     os.system( cmd )
+
+def align_subprocess( original_fasta, fasta, fastq  ):
+    # convert fastq to fasta ( Temporarily now using fastq file generated in Friedrich folder; since it is the same fastq. But We need to change it to Blastn for general cases )
+    cmd = "python main.py fastq_to_fasta %s > %s" % ( fastq, fasta )
+    run_cmd( cmd )
+    
+    # blastn-short search
+    cmd = "blastn -db %s  -query %s -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > %s.blastn" % ( original_fasta, fasta, fasta )
+    run_cmd( cmd )
+   
 
 def run( args ):
     #print args.program
@@ -50,15 +61,13 @@ def run( args ):
     #	             ***  ** **** ****************************************
     #
     #cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ./fastq/$2.fastq.gz ./fastq/$3.fastq.gz"
-    #cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o %s -p %s -m 15 --discard-untrimmed %s %s" % ( fq1, fq2, args.fastq1, args.fastq2 )
+    cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o %s -p %s -m 15 --discard-untrimmed %s %s" % ( fq1, fq2, args.fastq1, args.fastq2 )
+    print cmd
     #run_cmd( cmd )
-
+    
+    '''
     # convert fastq to fasta ( Temporarily now using fastq file generated in Friedrich folder; since it is the same fastq. But We need to change it to Blastn for general cases )
     cmd = "python main.py fastq_to_fasta %s > %s" % ( fq1, fa1 )
-
-    #print cmd
-    #return 
-
     run_cmd( cmd )
     
     cmd = "python main.py fastq_to_fasta %s > %s" % ( fq2, fa2 )
@@ -70,7 +79,20 @@ def run( args ):
 
     cmd = "blastn -db %s  -query %s -task blastn-short -outfmt 6 -max_target_seqs 20 -evalue 1e-8 > %s.blastn" % ( args.fasta2, fa2, fa2 )
     run_cmd( cmd )
-    
+    '''
+
+    # multi-threading
+    #th1 = thread.start_new_thread( align_subprocess, ( args.fasta1, fa1, fq1 ) )
+    th1 = threading.Thread(target=align_subprocess, args = ( args.fasta1, fa1, fq1 ) )
+    th1.start()
+
+    #th2 = thread.start_new_thread( align_subprocess, ( args.fasta2, fa2, fq2 ) )
+    th2 = threading.Thread(target=align_subprocess, args = ( args.fasta2, fa2, fq2 ) )
+    th2.start()
+
+    th1.join()
+    th2.join()
+
     # python parse blastn output and make ppi map
     # currently stringent case, no restriction for position cases
     # maybe ignoring orientation could be added in the future
