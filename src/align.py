@@ -1,6 +1,6 @@
 
 import os
-VERBOSE = False
+VERBOSE = True # False
 
 def run_cmd( cmd ):
     if VERBOSE: print cmd
@@ -17,9 +17,12 @@ def run( args ):
     if args.fasta2 == None:
         args.fasta2 = args.fasta1
 
-    [ dirname, fq1 ] = os.path.split( args.fastq1 )
-    [ dirname, fq2 ] = os.path.split( args.fastq2 )
+    [ dirname1, fq1 ] = os.path.split( args.fastq1 )
+    [ dirname2, fq2 ] = os.path.split( args.fastq2 )
 
+    if args.output == None:
+        args.output = dirname1
+    
     if fq1[-3:] == ".gz":
         fq1 = fq1[:-3]
     if fq2[-3:] == ".gz":
@@ -47,11 +50,15 @@ def run( args ):
     #	             ***  ** **** ****************************************
     #
     #cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o output/$1/$6/$2.fastq -p output/$1/$6/$3.fastq -m 15 --discard-untrimmed ./fastq/$2.fastq.gz ./fastq/$3.fastq.gz"
-    cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o %s -p %s -m 15 --discard-untrimmed %s %s" % ( fq1, fq2, args.fastq1, args.fastq2 )
-    run_cmd( cmd )
+    #cmd = "cutadapt -g CGCTGCAGGTCGACGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -G GCAGCTCGAGCTCGATGGATCTTAGTTACTTACCACTTTGTACAAGAAAGCTGGGT -o %s -p %s -m 15 --discard-untrimmed %s %s" % ( fq1, fq2, args.fastq1, args.fastq2 )
+    #run_cmd( cmd )
 
     # convert fastq to fasta ( Temporarily now using fastq file generated in Friedrich folder; since it is the same fastq. But We need to change it to Blastn for general cases )
     cmd = "python main.py fastq_to_fasta %s > %s" % ( fq1, fa1 )
+
+    #print cmd
+    #return 
+
     run_cmd( cmd )
     
     cmd = "python main.py fastq_to_fasta %s > %s" % ( fq2, fa2 )

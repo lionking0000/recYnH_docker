@@ -7,7 +7,27 @@ We assumed that the sequencing format is the same as we described in Nature Comm
 # After setting proper parameter in recYnH.py file
 # User can run the program as following command
 
-# python recYnH.py -i [Input fasta file] -f1 [Input fastq file1] -f2 [Input fastq file2] -o [Output folder]
+usage: recYnH.py [-h] COMMAND ...
+
+recYnH program
+
+positional arguments:
+  COMMAND     sub-command help
+    align     a help for align
+    merge     a help for merge
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+Commands:
+  align      Align the FASTQ sequencing files into bait and prey sequences to generate interaction matrix
+  merge      Merge two interaction matries to generate an interaction score matrix
+
+Run 'recYnH.py COMMAND --help' for more information on a command.
+
+---------------------------------------------------------------------------------------------------------------------
+
+# python recYnH.py align -i1 [Input fasta file] -f1 [Input fastq file1] -f2 [Input fastq file2] -o [Output folder]
 
 sh Y2H_Blastn.sh 2017-11-17_MiSeq S1_WD_R1 S1_WD_R2 ../data/A463-MGj69.RBP-MAP.-150 S1_W > qjobs/qjob_Sebastian_2017-11-17_MiSeq_S1_W1.sh
 
