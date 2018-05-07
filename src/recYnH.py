@@ -13,6 +13,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='recYnH program',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog = EPILOG )
+    
     #parser.add_argument('cmd', metavar='COMMAND', help="set COMMAND ('align'|'merge')", default="" )
     subparsers = parser.add_subparsers(dest='cmd', metavar="COMMAND", help='sub-command help')
     align_parser = subparsers.add_parser('align', help='a help for align')
@@ -40,11 +41,6 @@ if __name__ == "__main__":
         align.run( args )
     elif ( args.cmd == "merge" ):
         merge.run( args )
-        print args.program
-        print args.matrix1
-        print args.matrix2
-        print args.output
-        pass
     else:
         assert( False )  
 
