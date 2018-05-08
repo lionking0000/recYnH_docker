@@ -56,6 +56,18 @@ or
 
 sh docker_build.sh
 
+[Test code]
+
+sh docker_align.sh -i1 /share/db/A463-MGj69.RBP-MAP.-150.fa -f1 /share/fastq/S1_WD_R1.300000.fastq.gz -f2 /share/fastq/S1_WD_R2.300000.fastq.gz -o /share/output/2017-11-17_MiSeq -n S1_WD
+sh docker_align.sh -i1 /share/db/A463-MGj69.RBP-MAP.-150.fa -f1 /share/fastq/S2_QD_R1.300000.fastq.gz -f2 /share/fastq/S2_QD_R2.300000.fastq.gz -o /share/output/2017-11-17_MiSeq -n S2_QD
+
+sh docker_merge.sh -m1 /share/output/2017-11-17_MiSeq/S1_WD.ppi.txt -m2 /share/output/2017-11-17_MiSeq/S2_QD.ppi.txt
+
+or
+
+sh docker_merge.sh -m1 /share/output/example/S1_W.ppi.txt -m2 /share/output/example/S2_Q.ppi.txt
+
+
 [Run image]
 
 docker run -d -v ~/myshared:/share --name myynh recynh tail -f /dev/null

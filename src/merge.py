@@ -30,5 +30,5 @@ def run( args ):
         os.makedirs( temp_dir )
 
         
-    cmd = "Rscript ./visualization.R %s %s %s %s %s" % ( args.program, args.matrix1, args.matrix2, args.output, args.name )
+    cmd = "Rscript /usr/local/bin/visualization.R %s %s %s %s %s" % ( args.program, args.matrix1, args.matrix2, args.output, args.name )
     run_cmd( cmd )

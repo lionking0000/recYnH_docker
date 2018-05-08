@@ -1,4 +1,4 @@
-#!/opt/conda/bin/python2.7
+#!/usr/bin/python
 import fasta
 import sys
 import time

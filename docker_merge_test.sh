@@ -1,7 +1,7 @@
 #===================================
 # run this script as following
 #
-# sh docker_merge_test.sh -m1 ../../share/output/test/recYnH.ppi.txt -m2 ../../share/output/test/recYnH.ppi.txt
+# sh docker_merge_test.sh -m1 ../../share/output/example/S1_W.ppi.txt -m2 ../../share/output/example/S2_Q.ppi.txt
 #
 #===================================
 

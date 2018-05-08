@@ -1,4 +1,4 @@
-#!/opt/conda/bin/python2.7
+#!/usr/bin/python
 import sys
 import argparse
 import align
@@ -28,8 +28,8 @@ if __name__ == "__main__":
     
     merge_parser = subparsers.add_parser('merge', help='a help for merge') #, epilog = "Run 'recYnH.py merge --help' for more information on a command.")
     merge_parser.add_argument('-p', '--program', default='Y2H', help="set the experiments type ('Y2H'|'Y3H') (default 'Y2H')" ) # Y2H or Y3H
-    merge_parser.add_argument('-m1', '--matrix1', required=True, help="set the interaction matrix of selection condition" ) # Y2H or Y3H
-    merge_parser.add_argument('-m2', '--matrix2', required=False, help="set the interaction matrix of non-selection condition (OPTIONAL)" ) # Y2H or Y3H
+    merge_parser.add_argument('-m1', '--matrix1', required=True, help="set the interaction matrix of non-selection condition" ) # Y2H or Y3H
+    merge_parser.add_argument('-m2', '--matrix2', required=True, help="set the interaction matrix of selection condition" ) # Y2H or Y3H
     merge_parser.add_argument('-o', '--output', required=False, help="set the output folder name (default = same folder as interaction matrix file 1)" ) # Y2H or Y3H
     merge_parser.add_argument('-n', '--name', default='recYnH', required=False, help="set the output filename (default 'recYnH')" ) # Y2H or Y3H   
     
