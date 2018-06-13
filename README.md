@@ -54,6 +54,16 @@ Installation
 > git clone https://github.com/lionking0000/recYnH.git
 ~~~~
 
+R packages
+
+RUN Rscript -e "install.packages(c('pheatmap','RColorBrewer'))"
+RUN Rscript -e "install.packages(c('gtools','reshape2'))"
+RUN Rscript -e "install.packages(c('psych','clipr'))"
+RUN Rscript -e "install.packages(c('swfscMisc','PerformanceAnalytics'))"
+RUN Rscript -e "install.packages(c('mixtools','pROC'))"
+RUN Rscript -e "install.packages(c('outliers','readxl'))"
+RUN Rscript -e "install.packages(c('d3heatmap','matrixStats'))"
+
 Alignment
 ------------
 
