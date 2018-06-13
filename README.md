@@ -35,6 +35,8 @@ Requirements
 ------------
 
 rec-YnH requires the following software:
+ * python 2.7 or higher
+   * scipy
  * bowtie 1.0.0 (Langmead et al., 2009), http://bowtie-bio.sourceforge.net/index.shtml
  * cutadapt 
  * R 3.1 or higher, with the following packages installed (see Installation Section):
