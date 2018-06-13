@@ -57,6 +57,6 @@ Installation
 Alignment
 ------------
 
-python recYnH.py -i1 ../share/db/A463-MGj69.RBP-MAP.-150.fa -f1 ../share/fastq/2017-11-17_MiSeq/S1_WD_R1.fastq.gz -f2 ../share/fastq//2017-11-17_MiSeq/S1_WD_R2.fastq.gz -o ../share/output/2017-11-17_MiSeq -n S1_WD
+python recYnH.py align -i1 ../share/db/A463-MGj69.RBP-MAP.-150.fa -f1 ../share/fastq/S1_WD_R1.300000.fastq.gz -f2 ../share/fastq/S1_WD_R2.300000.fastq.gz -o ../share/output -n S1_WD
 
-python recYnH.py -i1 ../share/db/A463-MGj69.RBP-MAP.-150.fa -f1 ../share/fastq/2017-11-17_MiSeq/S2_QD_R1.fastq.gz -f2 ../share/fastq//2017-11-17_MiSeq/S2_QD_R2.fastq.gz -o ../share/output/2017-11-17_MiSeq2 -n S2_QD2
+python recYnH.py align -i1 ../share/db/A463-MGj69.RBP-MAP.-150.fa -f1 ../share/fastq/S2_QD_R1.300000.fastq.gz -f2 ../share/fastq/S2_QD_R2.300000.fastq.gz -o ../share/output -n S2_QD
