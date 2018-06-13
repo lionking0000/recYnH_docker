@@ -18,10 +18,6 @@ Table of Contents:
 	- [Differential Splicing Analysis](#differential-splicing-analysis)
 	- [Plotting](#plotting)
 	- [Simplifying Combine Table](#simplifying-combine-table)
-- [Combine output format](#combine-output-format)
-- [Investigating event-level conservation](#investigating-event-level-conservation)
-- [Interconnection with VastDB web](#interconnection-with-vastdb-web)
-- [Interconnection with Matt](#interconnection-with-matt)
 - [Issues](#issues)
 - [Contributions](#contributions)
 - [Citation](#citation)
@@ -35,7 +31,7 @@ Requirements
 ------------
 
 rec-YnH requires the following software:
- * python 2.7 or higher, https://www.python.org/downloads/
+ * python 2.7 or higher, with the following packages installed (see Installation Section):
    * scipy, https://pypi.org/project/scipy/
  * cutadapt, http://cutadapt.readthedocs.io/en/stable/installation.html
  * blast+ 2.6.0 or higher, http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+
