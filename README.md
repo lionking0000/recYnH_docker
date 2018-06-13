@@ -47,7 +47,7 @@ rec-YnH requires the following software:
    * MASS
    * devtools
    * [psiplot](https://github.com/kcha/psiplot)
- * blastn 2.6.0 or higher, ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+
+ * blastn 2.6.0 or higher, http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+
  
 Installation
 ------------
