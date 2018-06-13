@@ -35,7 +35,7 @@ Requirements
 ------------
 
 rec-YnH requires the following software:
- * python 2.7 or higher
+ * python 2.7 or higher, https://www.python.org/downloads/
    * scipy
  * bowtie 1.0.0 (Langmead et al., 2009), http://bowtie-bio.sourceforge.net/index.shtml
  * cutadapt 
@@ -47,7 +47,7 @@ rec-YnH requires the following software:
    * MASS
    * devtools
    * [psiplot](https://github.com/kcha/psiplot)
- * blastn 2.6.0 or higher (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+)
+ * blastn 2.6.0 or higher, ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+
  
 Installation
 ------------
