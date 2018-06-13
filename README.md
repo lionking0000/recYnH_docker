@@ -47,9 +47,7 @@ rec-YnH requires the following software:
    * MASS
    * devtools
    * [psiplot](https://github.com/kcha/psiplot)
- * Perl 5.10.1 or higher
- * GNU coreutils `sort` (all versions)
- * blastn
+ * blastn 2.6.0 or higher (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+)
  
 Installation
 ------------
